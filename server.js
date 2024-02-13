@@ -1,9 +1,21 @@
 const express = require('express')
+const mongoose = require('mongoose')
 
 // CONFIGURATION
 require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
+const MONGO_URI = process.env.MONGO_URI;
+
+
+// Database Connection
+mongoose.connect(MONGO_URI) 
+.then(()=> {
+    console.log('connected to mongo: ' + MONGO_URI);
+})
+.catch((err) => {
+    console.log('Error connecting to mongo:' + err);
+});
 
 // MIDDLEWARE
 app.set('views', __dirname + '/views')
